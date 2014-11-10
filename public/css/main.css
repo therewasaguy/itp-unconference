@@ -43,3 +43,14 @@
 }
 
 html,body {height:100%;}
+
+.centered{
+	text-align: center;
+}
+
+.topic-holder{
+	background: #f1f1f1;
+	padding: 20px;
+	border: 1px solid;
+	margin-bottom: 20px;
+}

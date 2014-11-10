@@ -62,6 +62,7 @@ app.all('*', function(req, res, next){
 var routes = require('./routes/routes.js');
 
 app.get('/', routes.index);
+app.get('/api/get/topics',routes.getData);
 app.post('/twilio-callback',routes.twilioCallback);
 
 // create NodeJS HTTP server using 'app'

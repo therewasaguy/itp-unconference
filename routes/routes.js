@@ -19,14 +19,32 @@ var twilio = require('twilio');
 */
 exports.index = function(req, res) {
 	
-	console.log("main page requested");
-
 		//build and render template
 		var viewData = {
 			pageTitle : "ITP January"
 		}
 
 		res.render('index.html', viewData);
+
+}
+
+exports.getData = function(req,res){
+
+	var data = {}; // data to respond back with
+
+	Topic.findQ({'type':'teach'})
+	.then(function(response){
+		console.log(response);
+		data['teach'] = response;
+		return Topic.findQ({'type':'learn'})
+	}) 
+	.then(function(response){
+		console.log(response);
+		data['learn'] = response;
+		return res.json(data);
+	}) 
+	.fail(function (err) { console.log(err); })
+	.done(); 
 
 }
 
