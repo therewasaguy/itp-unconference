@@ -37,8 +37,8 @@ exports.twilioCallback =  function(req,res){
 
 	// let's get the first word, so we know which action they are doing
 	// can be teach, learn, or vote
-	var re = new RegExp("^([\w\-]+)");
-	var action = re.test(newMsg);
+	var words = newMsg.split(" ");
+	var action = words[0];
 	console.log('action is ' + action);
 
   twilioResp.sms('Thanks, your message of "' + newMsg + '" was received!');
