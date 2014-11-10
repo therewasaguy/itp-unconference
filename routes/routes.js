@@ -45,24 +45,81 @@ exports.twilioCallback =  function(req,res){
 		if(i!=words.length-1) msgToSave += ' ';
 	}
 	
+
   var twilioResp = new twilio.TwimlResponse();
 
 	switch(action) {
 	    case 'teach':
-	        twilioResp.sms('Awesome! We have noted that you can teach ' + msgToSave);
-	        // saveToDb(newMsg);
-	        // emitSocketMsg(newMsg);
+	        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToSave);
+	        saveToDb('teach',msgToSave);
+	        //emitSocketMsg('teach',msgToSave);
 	        break;
 	    case 'learn':
 	       twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToSave);
+	        saveToDb('learn',msgToSave);
+	        //emitSocketMsg('learn',msgToSave);	       
 	        break;
 	    case 'vote':
-	        twilioResp.sms('Awesome! We have noted your vote for ' + msgToSave);
+	        twilioResp.sms('Oh cool! We have noted your vote for ' + msgToSave);
+	        saveToDb('learn',msgToSave);
+	        //emitSocketMsg('learn',msgToSave);	        
 	        break;	        
 	    default:
 	        twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
+	}
+
+	function saveToDb(key,msg){
+		switch(key) {
+	    case 'teach':
+	     var dataToSave = {
+	     	description: msg,
+	     	type: 'teach',
+	     	voteCount: 1,
+	     	vodeCode: generateCode()
+	     }
+	     // save to db;
+	     var topic = Model.Topic(dataToSave);		    	
+	    	topic.saveQ()
+	    	.then(function (response){ 
+	    		console.log(response);
+				})
+				.fail(function (err) { console.log(err); })
+				.done(); 
+        break;
+
+	    case 'learn':
+	     var dataToSave = {
+	     	description: msg,
+	     	type: 'learn',
+	     	voteCount: 1,
+	     	vodeCode: generateCode()
+	     }
+	     // save to db;
+	     var topic = Model.Topic(dataToSave);		    	
+	    	topic.saveQ()
+	    	.then(function (response){ 
+	    		console.log(response);
+				})
+				.fail(function (err) { console.log(err); })
+				.done();    
+        break;
+	    case 'vote':
+	    	// handle this differently
+	    	topic.       
+        break;	        
+	    default:
+	      res.status(500).send({error:'Oops, something went wrong.'});
+		}		
 	}		
 
-  res.set('Content-Type', 'text/xml');
-  res.send(twilioResp.toString());
+	function generateCode(){
+		var code = '';
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		for(var i=0;i<3;i++)
+			code += possible.charAt(Math.floor(Math.random() * possible.length));		
+		return code;
+	}
+
+  //res.set('Content-Type', 'text/xml');
+  //res.send(twilioResp.toString());
 }

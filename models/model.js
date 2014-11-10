@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 // define a schema
 var TopicSchema = new Schema({
 	description: String,
-	type: String,
+	type: {type:String, enum:'teach vote'.split(' ')},
+	voteCode: String,
 	voteCount: Number,
 	person: String, // if proposing to teach it, we need their name
   dateAdded: {type: Date, default: moment}
