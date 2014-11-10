@@ -96,7 +96,7 @@ exports.twilioCallback =  function(req,res){
 	     var topic = Topic(dataToSave);		    	
 	    	topic.saveQ()
 	    	.then(function (response){
-	    		conversationId = response._id;
+	    		conversationId = response._id.str;
 	    		console.log(response);
 	    		respondBackToTwilio('teach');
 				})
