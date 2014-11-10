@@ -31,14 +31,22 @@ exports.index = function(req, res) {
 }
 
 exports.twilioCallback =  function(req,res){
-	console.log('incoming message is '+ req.body);
+	console.log('incoming message is '+ req);
 
-	var twilioResp = new twilio.TwimlResponse();
-	twilioResp.sms('thanks for the message yo!');
+  var body = ''; // will hold the body of the message
 
-  //Render the TwiML document using "toString"
-  res.writeHead(200, {
-      'Content-Type':'text/xml'
+  req.on('data', function(data) {
+    body += data;
   });
-  res.end(twilioResp.toString());
+
+  req.on('end', function() {
+    //Create TwiML response
+    var twilioResp = new twilio.TwimlResponse();
+
+    twilioResp.sms('Thanks, your message of "' + body + '" was received!');
+
+   res.writeHead(200, {'Content-Type': 'text/xml'});
+   res.end(twilioResp.toString());
+   });
+
 }
