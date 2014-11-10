@@ -9,7 +9,7 @@ var http = require('http');
 var request = require('request'); // library to make requests to remote urls
 var Q = require('q'); // library for javascript promises
 var moment = require("moment"); // date manipulation library
-var Model = require("../models/model.js"); //db model... call like Model.Topic
+var Topic = require("../models/model.js"); //db model... call like Model.Topic
 
 //Twilio
 var twilio = require('twilio');
@@ -78,7 +78,7 @@ exports.twilioCallback =  function(req,res){
 	     	vodeCode: generateCode()
 	     }
 	     // save to db;
-	     var topic = Model.Topic(dataToSave);		    	
+	     var topic = Topic(dataToSave);		    	
 	    	topic.saveQ()
 	    	.then(function (response){ 
 	    		console.log(response);
@@ -95,7 +95,7 @@ exports.twilioCallback =  function(req,res){
 	     	vodeCode: generateCode()
 	     }
 	     // save to db;
-	     var topic = Model.Topic(dataToSave);		    	
+	     var topic = new Topic(dataToSave);		    	
 	    	topic.saveQ()
 	    	.then(function (response){ 
 	    		console.log(response);
