@@ -62,29 +62,23 @@ exports.twilioCallback =  function(req,res){
 		msgToSave += words[i];
 		if(i!=words.length-1) msgToSave += ' ';
 	}
-	
-
-  var twilioResp = new twilio.TwimlResponse();
 
 	switch(action) {
 	    case 'teach':
-	        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToSave);
-	        saveToDb('teach',msgToSave);
-	        //emitSocketMsg('teach',msgToSave);
-	        break;
+        saveToDb('teach',msgToSave);
+        //emitSocketMsg('teach',msgToSave);
+        break;
 	    case 'learn':
-	       twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToSave);
-	        saveToDb('learn',msgToSave);
-	        //emitSocketMsg('learn',msgToSave);	       
-	        break;
+        saveToDb('learn',msgToSave);
+        //emitSocketMsg('learn',msgToSave);	       
+        break;
 	    case 'vote':
-	        twilioResp.sms('Oh cool! We have noted your vote for ' + msgToSave);
-	        saveToDb('vote',msgToSave);
-	        //emitSocketMsg('learn',msgToSave);	        
-	        break;	        
+        saveToDb('vote',msgToSave);
+        //emitSocketMsg('learn',msgToSave);	        
+        break;	        
 	    default:
-	        twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
-	}
+	    	respondBackToTwilio('default');
+	   }
 
 	function saveToDb(key,msg){
 		switch(key) {
@@ -93,7 +87,7 @@ exports.twilioCallback =  function(req,res){
 	     	description: msg,
 	     	type: 'teach',
 	     	voteCount: 1,
-	     	voteCode: generateCode()
+	     	voteCode: generateVoteCode()
 	     }
 	     // save to db;
 	     var topic = Topic(dataToSave);		    	
@@ -110,7 +104,7 @@ exports.twilioCallback =  function(req,res){
 	     	description: msg,
 	     	type: 'learn',
 	     	voteCount: 1,
-	     	voteCode: generateCode()
+	     	voteCode: generateVoteCode()
 	     }
 	     // save to db;
 	     var topic = new Topic(dataToSave);		    	
@@ -126,7 +120,7 @@ exports.twilioCallback =  function(req,res){
 	    	Topic.findOneQ({'voteCode':msg})
 	    	.then(function(response){
 	    		console.log(response);
-	    		if(response == 'null') return;
+	    		if(response == null) return respondBackToTwilio('vote-fail');
 	    		else { 
 	    			var newVoteCount = response.voteCount + 1;
 	    			var topicId = response._id;
@@ -141,7 +135,7 @@ exports.twilioCallback =  function(req,res){
 		}		
 	}		
 
-	function generateCode(){
+	function generateVoteCode(){
 		var code = '';
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		for(var i=0;i<3;i++)
@@ -149,6 +143,27 @@ exports.twilioCallback =  function(req,res){
 		return code;
 	}
 
-  //res.set('Content-Type', 'text/xml');
-  //res.send(twilioResp.toString());
+	function respondBackToTwilio(key){
+
+		var twilioResp = new twilio.TwimlResponse();
+
+		switch(key) {
+	    case 'teach':
+        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToSave);
+        break;
+	    case 'learn':
+        twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToSave);
+        break;
+	    case 'vote':
+	    	twilioResp.sms('Oh cool! We have noted your vote for ' + msgToSave);
+	    	break;
+	    case 'vote-fail':
+	    	twilioResp.sms('Oops! Could not find that vote code :(. Try again');
+	    	break;	    	
+	    default:
+	      twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
+	  	}
+		res.set('Content-Type', 'text/xml');
+  	res.send(twilioResp.toString());		
+	}
 }
