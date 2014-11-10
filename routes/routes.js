@@ -75,7 +75,7 @@ exports.twilioCallback =  function(req,res){
 	     	description: msg,
 	     	type: 'teach',
 	     	voteCount: 1,
-	     	vodeCode: generateCode()
+	     	voteCode: generateCode()
 	     }
 	     // save to db;
 	     var topic = Topic(dataToSave);		    	
@@ -92,7 +92,7 @@ exports.twilioCallback =  function(req,res){
 	     	description: msg,
 	     	type: 'learn',
 	     	voteCount: 1,
-	     	vodeCode: generateCode()
+	     	voteCode: generateCode()
 	     }
 	     // save to db;
 	     var topic = new Topic(dataToSave);		    	
