@@ -105,7 +105,18 @@ exports.twilioCallback =  function(req,res){
         break;
 	    case 'vote':
 	    	// handle this differently
-	    	topic.       
+	    	Topic.findOneQ({'voteCode':msg})
+	    	.then(function(response){
+	    		console.log(response);
+	    		if(response == 'null') return;
+	    		else { 
+	    			var newVoteCount = response.voteCount + 1;
+	    			var topicId = response._id;
+	    			return Topic.findByIdAndUpdateQ(topicId,{'voteCount':newVoteCount})
+	    		}
+	    	}) 
+	    	.fail(function (err) { console.log(err); })
+				.done();       
         break;	        
 	    default:
 	      res.status(500).send({error:'Oops, something went wrong.'});
