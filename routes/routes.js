@@ -49,7 +49,7 @@ exports.getData = function(req,res){
 exports.twilioCallback =  function(req,res){
 
 	var newMsg = req.body.Body;
-	console.log(req.body);
+	console.log(req);
 
 	// let's get the first word, so we know which action they are doing
 	// can be teach, learn, or vote
