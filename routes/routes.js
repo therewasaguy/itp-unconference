@@ -12,7 +12,7 @@ var moment = require("moment"); // date manipulation library
 var Model = require("../models/model.js"); //db model... call like Model.Topic
 
 //Twilio
-var twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+var twilio = require('twilio');
 
 /*
 	GET /
@@ -33,10 +33,11 @@ exports.index = function(req, res) {
 exports.twilioCallback =  function(req,res){
 
 	var newMsg = req.body.body;
+	console.log(newMsg);
 	var twilioResp = new twilio.TwimlResponse();
 
   twilioResp.sms('Thanks, your message of "' + newMsg + '" was received!');
 
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twilioResp.toString());
+  res.set('Content-Type', 'text/xml');
+  res.send(twilioResp.toString());
 }
