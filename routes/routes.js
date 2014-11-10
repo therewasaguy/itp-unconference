@@ -32,9 +32,7 @@ exports.index = function(req, res) {
 
 exports.twilioCallback =  function(req,res){
 
-	var newMsg = req.body.body;
-	console.log(req);
-	console.log(newMsg);
+	var newMsg = req.body.Body;
 	var twilioResp = new twilio.TwimlResponse();
 
   twilioResp.sms('Thanks, your message of "' + newMsg + '" was received!');
