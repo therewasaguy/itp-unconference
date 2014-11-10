@@ -62,22 +62,7 @@ app.all('*', function(req, res, next){
 var routes = require('./routes/routes.js');
 
 app.get('/', routes.index);
-app.get('/add', routes.add);
-app.post('/api/add/photo', routes.savePhotoToDb);
-app.post('/api/add/description', routes.saveDescriptionToDb);
-
-app.get('/api/user/:id', routes.getUser);
-app.get('/api/get/users/:num', routes.getUsers);
-
-// TESTING / UTILITY ROUTES - not used in production //
-
-// call to create users in the DB from a CSV
-//app.get('/onlysamshoulddothis/createUsers', routes.createUsers);
-
-// call to add photos for all users, for testing purposes
-//app.get('/onlysamshoulddothis/addPhotos', routes.addPhotos);
-// call to clear all photos for all users, for testing purposes
-//app.get('/onlysamshoulddothis/deletePhotos', routes.deletePhotos)
+app.post('/twilio-callback',routes.twilioCallback);
 
 // create NodeJS HTTP server using 'app'
 http.createServer(app).listen(app.get('port'), function(){
