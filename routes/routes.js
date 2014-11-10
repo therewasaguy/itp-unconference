@@ -50,6 +50,7 @@ exports.twilioCallback =  function(req,res){
 
 	var newMsg = req.body.Body;
 	console.log(req);
+	var conversationId; // an id to track the conversation, will be the mongoDb id
 
 	// let's get the first word, so we know which action they are doing
 	// can be teach, learn, or vote
@@ -73,8 +74,11 @@ exports.twilioCallback =  function(req,res){
         break;
 	    case 'vote':
         updateDb('vote',msgToRelay);
-        //emitSocketMsg('learn',msgToRelay);	        
-        break;	        
+        //emitSocketMsg('vote',msgToRelay);	        
+        break;
+      case 'name':
+      	updateDb('name',msgToRelay);
+      	//emitSocketMsg('vote',msgToRelay);
 	    default:
 	    	respondBackToTwilio('default');
 	   }
@@ -91,8 +95,10 @@ exports.twilioCallback =  function(req,res){
 	     // save to db;
 	     var topic = Topic(dataToSave);		    	
 	    	topic.saveQ()
-	    	.then(function (response){ 
+	    	.then(function (response){
+	    		conversationId = _id;
 	    		console.log(response);
+	    		respondBackToTwilio('teach');
 				})
 				.fail(function (err) { console.log(err); })
 				.done(); 
@@ -147,7 +153,8 @@ exports.twilioCallback =  function(req,res){
 
 		switch(key) {
 	    case 'teach':
-        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay);
+        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name.');
+        res.cookie('conversation',conversationId);
         break;
 	    case 'learn':
         twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToRelay);
