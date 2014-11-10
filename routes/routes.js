@@ -31,15 +31,16 @@ exports.index = function(req, res) {
 }
 
 exports.twilioCallback =  function(req,res){
-	console.log('incoming message is '+ req);
 
   var body = ''; // will hold the body of the message
 
   req.on('data', function(data) {
+    console.log('got here');
     body += data;
   });
 
   req.on('end', function() {
+  	console.log('got here 2');
     //Create TwiML response
     var twilioResp = new twilio.TwimlResponse();
 
