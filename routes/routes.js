@@ -33,15 +33,30 @@ exports.index = function(req, res) {
 exports.twilioCallback =  function(req,res){
 
 	var newMsg = req.body.Body;
-	var twilioResp = new twilio.TwimlResponse();
 
 	// let's get the first word, so we know which action they are doing
 	// can be teach, learn, or vote
 	var words = newMsg.split(" ");
-	var action = words[0];
-	console.log('action is ' + action);
+	console.log(words);
+	var action = words[0].toLowerCase();
+	
+  var twilioResp = new twilio.TwimlResponse();
 
-  twilioResp.sms('Thanks, your message of "' + newMsg + '" was received!');
+	switch(action) {
+	    case 'teach':
+	        twilioResp.sms('Awesome! We have noted your message ' + newMsg);
+	        // saveToDb(newMsg);
+	        // emitSocketMsg(newMsg);
+	        break;
+	    case 'learn':
+	       twilioResp.sms('Awesome! We have noted your message ' + newMsg);
+	        break;
+	    case 'vote':
+	        twilioResp.sms('Awesome! We have noted your message ' + newMsg);
+	        break;	        
+	    default:
+	        twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
+	}		
 
   res.set('Content-Type', 'text/xml');
   res.send(twilioResp.toString());
