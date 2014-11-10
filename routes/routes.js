@@ -158,7 +158,7 @@ exports.twilioCallback =  function(req,res){
 	    	twilioResp.sms('Oh cool! We have noted your vote for ' + msgToSave);
 	    	break;
 	    case 'vote-fail':
-	    	twilioResp.sms('Oops! Could not find that vote code :(. Try again');
+	    	twilioResp.sms('Oops! Could not find that vote code ('+msgToSave+') :( Try again');
 	    	break;	    	
 	    default:
 	      twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
