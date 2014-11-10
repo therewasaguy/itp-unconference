@@ -61,7 +61,7 @@ exports.twilioCallback =  function(req,res){
 	        break;
 	    case 'vote':
 	        twilioResp.sms('Oh cool! We have noted your vote for ' + msgToSave);
-	        saveToDb('learn',msgToSave);
+	        saveToDb('vote',msgToSave);
 	        //emitSocketMsg('learn',msgToSave);	        
 	        break;	        
 	    default:
