@@ -37,22 +37,26 @@ exports.twilioCallback =  function(req,res){
 	// let's get the first word, so we know which action they are doing
 	// can be teach, learn, or vote
 	var words = newMsg.split(" ");
-	console.log(words);
 	var action = words[0].toLowerCase();
+	var msgToSave = ''; // all the stuff after the action word
+	for(var i=0;i<msgToSave.length;i++){
+		if(i==0) continue;
+		msgToSave += words[i];
+	}
 	
   var twilioResp = new twilio.TwimlResponse();
 
 	switch(action) {
 	    case 'teach':
-	        twilioResp.sms('Awesome! We have noted your message ' + newMsg);
+	        twilioResp.sms('Awesome! We have noted that you can teach ' + msgToSave);
 	        // saveToDb(newMsg);
 	        // emitSocketMsg(newMsg);
 	        break;
 	    case 'learn':
-	       twilioResp.sms('Awesome! We have noted your message ' + newMsg);
+	       twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToSave);
 	        break;
 	    case 'vote':
-	        twilioResp.sms('Awesome! We have noted your message ' + newMsg);
+	        twilioResp.sms('Awesome! We have noted your vote for ' + msgToSave);
 	        break;	        
 	    default:
 	        twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
