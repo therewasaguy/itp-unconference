@@ -39,9 +39,10 @@ exports.twilioCallback =  function(req,res){
 	var words = newMsg.split(" ");
 	var action = words[0].toLowerCase();
 	var msgToSave = ''; // all the stuff after the action word
-	for(var i=0;i<msgToSave.length;i++){
+	for(var i=0;i<words.length;i++){
 		if(i==0) continue;
 		msgToSave += words[i];
+		if(i!=words.length-1) msgToSave += ' ';
 	}
 	
   var twilioResp = new twilio.TwimlResponse();
