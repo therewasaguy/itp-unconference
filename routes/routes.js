@@ -32,6 +32,8 @@ exports.index = function(req, res) {
 
 exports.twilioCallback =  function(req,res){
 
+	console.log(req);
+	
   var body = ''; // will hold the body of the message
 
   req.on('data', function(data) {
