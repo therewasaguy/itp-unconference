@@ -34,12 +34,10 @@ exports.getData = function(req,res){
 
 	Topic.findQ({'type':'teach'})
 	.then(function(response){
-		console.log(response);
 		data['teach'] = response;
 		return Topic.findQ({'type':'learn'})
 	}) 
 	.then(function(response){
-		console.log(response);
 		data['learn'] = response;
 		return res.json(data);
 	}) 
@@ -51,36 +49,37 @@ exports.getData = function(req,res){
 exports.twilioCallback =  function(req,res){
 
 	var newMsg = req.body.Body;
+	console.log(req.body);
 
 	// let's get the first word, so we know which action they are doing
 	// can be teach, learn, or vote
 	var words = newMsg.split(" ");
 	var action = words[0].toLowerCase();
-	var msgToSave = ''; // all the stuff after the action word
+	var msgToRelay = ''; // all the stuff after the action word
 	for(var i=0;i<words.length;i++){
 		if(i==0) continue;
-		msgToSave += words[i];
-		if(i!=words.length-1) msgToSave += ' ';
+		msgToRelay += words[i];
+		if(i!=words.length-1) msgToRelay += ' ';
 	}
 
 	switch(action) {
 	    case 'teach':
-        saveToDb('teach',msgToSave);
-        //emitSocketMsg('teach',msgToSave);
+        updateDb('teach',msgToRelay);
+        //emitSocketMsg('teach',msgToRelay);
         break;
 	    case 'learn':
-        saveToDb('learn',msgToSave);
-        //emitSocketMsg('learn',msgToSave);	       
+        updateDb('learn',msgToRelay);
+        //emitSocketMsg('learn',msgToRelay);	       
         break;
 	    case 'vote':
-        saveToDb('vote',msgToSave);
-        //emitSocketMsg('learn',msgToSave);	        
+        updateDb('vote',msgToRelay);
+        //emitSocketMsg('learn',msgToRelay);	        
         break;	        
 	    default:
 	    	respondBackToTwilio('default');
 	   }
 
-	function saveToDb(key,msg){
+	function updateDb(key,msg){
 		switch(key) {
 	    case 'teach':
 	     var dataToSave = {
@@ -119,7 +118,6 @@ exports.twilioCallback =  function(req,res){
 	    	// handle this differently
 	    	Topic.findOneQ({'voteCode':msg})
 	    	.then(function(response){
-	    		console.log(response);
 	    		if(response == null) return respondBackToTwilio('vote-fail');
 	    		else { 
 	    			var newVoteCount = response.voteCount + 1;
@@ -149,16 +147,16 @@ exports.twilioCallback =  function(req,res){
 
 		switch(key) {
 	    case 'teach':
-        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToSave);
+        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay);
         break;
 	    case 'learn':
-        twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToSave);
+        twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToRelay);
         break;
 	    case 'vote':
-	    	twilioResp.sms('Oh cool! We have noted your vote for ' + msgToSave);
+	    	twilioResp.sms('Oh cool! We have noted your vote for ' + msgToRelay);
 	    	break;
 	    case 'vote-fail':
-	    	twilioResp.sms('Oops! Could not find that vote code ('+msgToSave+') :( Try again');
+	    	twilioResp.sms('Oops! Could not find that vote code ('+msgToRelay+') :( Try again');
 	    	break;	    	
 	    default:
 	      twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
