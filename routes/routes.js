@@ -32,24 +32,11 @@ exports.index = function(req, res) {
 
 exports.twilioCallback =  function(req,res){
 
-	console.log(req);
-	
-  var body = ''; // will hold the body of the message
+	var newMsg = req.body.body;
+	var twilioResp = new twilio.TwimlResponse();
 
-  req.on('data', function(data) {
-    console.log('got here');
-    body += data;
-  });
+  twilioResp.sms('Thanks, your message of "' + newMsg + '" was received!');
 
-  req.on('end', function() {
-  	console.log('got here 2');
-    //Create TwiML response
-    var twilioResp = new twilio.TwimlResponse();
-
-    twilioResp.sms('Thanks, your message of "' + body + '" was received!');
-
-   res.writeHead(200, {'Content-Type': 'text/xml'});
-   res.end(twilioResp.toString());
-   });
-
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twilioResp.toString());
 }
