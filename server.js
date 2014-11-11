@@ -163,7 +163,7 @@ function twilioCallback (req,res){
         description: msg,
         type: 'teach',
         voteCount: 1,
-        person: {phoneNumber: req.body.From;}
+        person: {phoneNumber: req.body.From},
         voteCode: generateVoteCode()
        }
        // save to db;

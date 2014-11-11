@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 // local --> http://localhost:5000/
 // server --> http://itp-jan-jam.herokuapp.com/
-var socket = io('http://localhost:5000/');
+var socket = io('http://itp-jan-jam.herokuapp.com/');
 socket.on('connect', function () {
 	console.log('connected');
 });
