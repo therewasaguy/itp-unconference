@@ -8,7 +8,7 @@ $(document).ready(function(){
 	        $('#teach').append(
 	          '<div class="topic-holder" id="'+data.teach[index]._id+'">' +
 	          	'<p>Topic: ' +data.teach[index].description+'</p>' +
-	          	'<p>Session Leader: ' +data.teach[index].person+'</p>' +
+	          	(data.teach[index].person.name ?'<p>Session Leader: ' +data.teach[index].person.name+'</p>' : '') +
 	          	'<p class="vote-count">Current Vote Count: ' +data.teach[index].voteCount+'</p>' +
 	          	'<p>Vote for this topic by texting "Vote ' +data.teach[index].voteCode+'"</p>' +
 	        	'</div>'				  
@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 // local --> http://localhost:5000/
 // server --> http://itp-jan-jam.herokuapp.com/
-var socket = io('http://itp-jan-jam.herokuapp.com/');
+var socket = io('http://localhost:5000/');
 socket.on('connect', function () {
 	console.log('connected');
 });
@@ -42,7 +42,7 @@ socket.on('twilioData', function (data) {
       $('#teach').append(
         '<div class="topic-holder" id="'+data.topic._id+'">' +
         	'<p>Topic: ' +data.topic.description+'</p>' +
-        	'<p>Session Leader: ' +data.topic.person+'</p>' +
+        	(data.topic.person.name ?'<p>Session Leader: ' +data.topic.person.name+'</p>' : '') +
         	'<p class="vote-count">Current Vote Count: ' +data.topic.voteCount+'</p>' +
         	'<p>Vote for this topic by texting "Vote ' +data.topic.voteCode+'"</p>' +
       	'</div>'				  
@@ -63,7 +63,6 @@ socket.on('twilioData', function (data) {
   		//render teach data
   		console.log(data.topic)
   		$("#"+data.topic._id+" .vote-count").text('Current Vote Count: ' +data.topic.voteCount);
-
   		break;
   	default:
   		console.log('invalid twilio socket event');	  		  		

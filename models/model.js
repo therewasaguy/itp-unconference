@@ -8,7 +8,7 @@ var TopicSchema = new Schema({
 	type: {type:String, enum:'teach learn'.split(' ')},
 	voteCode: String,
 	voteCount: Number,
-	person: String, // if proposing to teach it, we need their name
+	person: {name: String, phoneNumber: String}, // if proposing to teach it, we need their name
   dateAdded: {type: Date, default: moment}
 });
 
