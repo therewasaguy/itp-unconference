@@ -9,7 +9,7 @@ $(document).ready(function(){
 	          '<div class="topic-holder" id="'+data.teach[index]._id+'">' +
 	          	'<p>Topic: ' +data.teach[index].description+'</p>' +
 	          	'<p>Session Leader: ' +data.teach[index].person+'</p>' +
-	          	'<p>Current Vote Count: ' +data.teach[index].voteCount+'</p>' +
+	          	'<p class="vote-count">Current Vote Count: ' +data.teach[index].voteCount+'</p>' +
 	          	'<p>Vote for this topic by texting "Vote ' +data.teach[index].voteCode+'"</p>' +
 	        	'</div>'				  
 	        );
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	        $('#learn').append(
 	          '<div class="topic-holder" id="'+data.learn[index]._id+'">' +
 	          	'<p>Topic: ' +data.learn[index].description+'</p>' +
-	          	'<p>Current Vote Count: ' +data.learn[index].voteCount+'</p>' +
+	          	'<p class="vote-count">Current Vote Count: ' +data.learn[index].voteCount+'</p>' +
 	          	'<p>Vote for this topic by texting "Vote ' +data.learn[index].voteCode+'"</p>' +
 	        	'</div>'				  
 	        );
@@ -39,14 +39,31 @@ socket.on('twilioData', function (data) {
   	case 'teach':
   		//render teach data
   		console.log(data.topic)
+      $('#teach').append(
+        '<div class="topic-holder" id="'+data.topic._id+'">' +
+        	'<p>Topic: ' +data.topic.description+'</p>' +
+        	'<p>Session Leader: ' +data.topic.person+'</p>' +
+        	'<p class="vote-count">Current Vote Count: ' +data.topic.voteCount+'</p>' +
+        	'<p>Vote for this topic by texting "Vote ' +data.topic.voteCode+'"</p>' +
+      	'</div>'				  
+      );  		
   		break;
   	case 'learn':
   		//render teach data
   		console.log(data.topic)
+      $('#learn').append(
+        '<div class="topic-holder" id="'+data.topic._id+'">' +
+        	'<p>Topic: ' +data.topic.description+'</p>' +
+        	'<p class="vote-count">Current Vote Count: ' +data.topic.voteCount+'</p>' +
+        	'<p>Vote for this topic by texting "Vote ' +data.topic.voteCode+'"</p>' +
+      	'</div>'				  
+      );    		
   		break;
   	case 'vote':
   		//render teach data
   		console.log(data.topic)
+  		$("#"+data.topic._id+" .vote-count").text('Current Vote Count: ' +data.topic.voteCount);
+
   		break;
   	default:
   		console.log('invalid twilio socket event');	  		  		

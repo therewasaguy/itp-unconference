@@ -190,7 +190,7 @@ function twilioCallback (req,res){
         topic.saveQ()
         .then(function (response){ 
           emitSocketMsg('learn',response);
-          respondBackToTwilio('teach');
+          respondBackToTwilio('learn');
         })
         .fail(function (err) { console.log(err); })
         .done();    
