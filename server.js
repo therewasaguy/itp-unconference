@@ -169,7 +169,8 @@ function twilioCallback (req,res){
        var topic = Topic(dataToSave);         
         topic.saveQ()
         .then(function (response){
-          conversationId = response._id.str;
+          conversationId = response._id;
+          conversationId = conversationId.toString();
           console.log(conversationId);
           emitSocketMsg('teach',response);
           respondBackToTwilio('teach');
@@ -255,7 +256,7 @@ function twilioCallback (req,res){
 
     switch(key) {
       case 'teach':
-        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name. Start your next message with name, like "Name Dan Shiffman"');
+        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name. Start your next message with the word Name, like Name Dan Shiffman');
         res.cookie('conversation',conversationId);
         break;
       case 'learn':
