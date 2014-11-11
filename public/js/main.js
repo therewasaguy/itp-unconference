@@ -32,14 +32,23 @@ $(document).ready(function(){
 var socket = io('http://itp-jan-jam.herokuapp.com/');
 socket.on('connect', function () {
 	console.log('connected');
-	socket.emit('meh','hello back');
-});
-
-socket.on('hello', function (data) {
-  console.log(data);
 });
 
 socket.on('twilioData', function (data) {
-  console.log(data);
-  //socket.emit('my other event', { my: 'data' });
+  switch(data.key){
+  	case 'teach':
+  		//render teach data
+  		console.log(data.topic)
+  		break;
+  	case 'learn':
+  		//render teach data
+  		console.log(data.topic)
+  		break;
+  	case 'vote':
+  		//render teach data
+  		console.log(data.topic)
+  		break;
+  	default:
+  		console.log('invalid twilio socket event');	  		  		
+  }
 });

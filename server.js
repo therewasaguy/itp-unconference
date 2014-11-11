@@ -137,26 +137,26 @@ function twilioCallback (req,res){
 
   switch(action) {
       case 'teach':
-        io.sockets.emit('twilioData',msgToRelay);
-        updateDb('teach',msgToRelay);
-        //emitSocketMsg('teach',msgToRelay);
+        handleTwilioMessage('teach',msgToRelay);
         break;
       case 'learn':
-        updateDb('learn',msgToRelay);
-        //emitSocketMsg('learn',msgToRelay);         
+        handleTwilioMessage('learn',msgToRelay);
         break;
       case 'vote':
-        updateDb('vote',msgToRelay);
-        //emitSocketMsg('vote',msgToRelay);         
+        handleTwilioMessage('vote',msgToRelay);
         break;
       case 'name':
-        updateDb('name',msgToRelay);
-        //emitSocketMsg('vote',msgToRelay);
+        handleTwilioMessage('name',msgToRelay);
       default:
         respondBackToTwilio('default');
      }
 
-  function updateDb(key,msg){
+  //function does 3 things 
+  // 1. saves the data to db
+  // 2. calls function to emit it to front-end via sockets
+  // 3. responds back to twilio
+
+  function handleTwilioMessage(key,msg){
     switch(key) {
       case 'teach':
        var dataToSave = {
@@ -171,6 +171,7 @@ function twilioCallback (req,res){
         .then(function (response){
           conversationId = response._id.str;
           console.log(response);
+          emitSocketMsg('teach',response);
           respondBackToTwilio('teach');
         })
         .fail(function (err) { console.log(err); })
@@ -188,7 +189,8 @@ function twilioCallback (req,res){
        var topic = new Topic(dataToSave);         
         topic.saveQ()
         .then(function (response){ 
-          console.log(response);
+          emitSocketMsg('learn',response);
+          respondBackToTwilio('teach');
         })
         .fail(function (err) { console.log(err); })
         .done();    
@@ -203,6 +205,10 @@ function twilioCallback (req,res){
             var topicId = response._id;
             return Topic.findByIdAndUpdateQ(topicId,{'voteCount':newVoteCount})
           }
+        })
+        .then(function(response){
+          emitSocketMsg('vote',response);
+          respondBackToTwilio('vote');
         }) 
         .fail(function (err) { console.log(err); })
         .done();       
@@ -243,6 +249,11 @@ function twilioCallback (req,res){
       }
     res.set('Content-Type', 'text/xml');
     res.send(twilioResp.toString());    
+  }
+
+  function emitSocketMsg(key,data){
+    var dataToRelay = {key:key,topic:data};
+    io.sockets.emit('twilioData',dataToRelay);
   }
 }
 
