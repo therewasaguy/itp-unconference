@@ -10,7 +10,8 @@
     "q": ">= 1.0.0",
     "mongoose-q" : "0.0.10",
     "request" : "2.16.6",
-    "twilio" : "1.7.0"
+    "twilio" : "1.7.0",
+    "socket.io" : "1.2.0"
   },
 
   "engines" : {

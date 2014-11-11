@@ -66,6 +66,17 @@ app.get('/api/get/topics',routes.getData);
 app.post('/twilio-callback',routes.twilioCallback);
 
 // create NodeJS HTTP server using 'app'
-http.createServer(app).listen(app.get('port'), function(){
+var server = require('http').createServer(app);
+
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  console.log('hello new socket user ' + socket.id)
+  socket.on('event', function(data){});
+  socket.on('disconnect', function(){});
+  module.exports = socket;
+});
+
+// listen 
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

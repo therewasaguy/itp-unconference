@@ -65,6 +65,7 @@ exports.twilioCallback =  function(req,res){
 
 	switch(action) {
 	    case 'teach':
+				io.sockets.emit('twilioData', msgToRelay);
         updateDb('teach',msgToRelay);
         //emitSocketMsg('teach',msgToRelay);
         break;
