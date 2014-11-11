@@ -10,7 +10,7 @@ var request = require('request'); // library to make requests to remote urls
 var Q = require('q'); // library for javascript promises
 var moment = require("moment"); // date manipulation library
 var Topic = require("../models/model.js"); //db model... call like Model.Topic
-var socket = require("../server.js");
+var io = require("../server.js");
 
 //Twilio
 var twilio = require('twilio');

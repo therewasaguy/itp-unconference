@@ -71,9 +71,10 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 io.on('connection', function(socket){
   console.log('hello new socket user ' + socket.id)
-  socket.on('event', function(data){});
-  socket.on('disconnect', function(){});
-  module.exports = socket;
+  socket.on('disconnect', function(){
+
+  });
+  module.exports = io;
 });
 
 // listen 
