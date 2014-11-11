@@ -121,7 +121,6 @@ function getData (req,res){
 function twilioCallback (req,res){
 
   var newMsg = req.body.Body;
-  console.log(req);
   var conversationId; // an id to track the conversation, will be the mongoDb id
 
   // let's get the first word, so we know which action they are doing
@@ -171,7 +170,7 @@ function twilioCallback (req,res){
         topic.saveQ()
         .then(function (response){
           conversationId = response._id.str;
-          console.log(response);
+          console.log(conversationId);
           emitSocketMsg('teach',response);
           respondBackToTwilio('teach');
         })
@@ -197,7 +196,7 @@ function twilioCallback (req,res){
         .done();    
         break;
       case 'vote':
-        // handle this differently
+        // increment the vote in the db and then let the front-end know
         var emitNewData = true; // should we emit the data to front-end? becomes false if error hit
         Topic.findOneQ({'voteCode':msg})
         .then(function(response){
@@ -220,7 +219,22 @@ function twilioCallback (req,res){
         }) 
         .fail(function (err) { console.log(err); })
         .done();       
-        break;          
+        break; 
+      case 'name':
+        // add the user's name for the topic they want to teach
+        Topic.findByIdAndUpdateQ('123',{person.name:msg}) // need this from the header;
+        .then(function(response){
+          if(response == null) {
+            return respondBackToTwilio('name-fail');
+          }
+          else { 
+            emitSocketMsg('name',response);
+            respondBackToTwilio('name');
+          }
+        })
+        .fail(function (err) { console.log(err); })
+        .done();       
+        break;                 
       default:
         res.status(500).send({error:'Oops, something went wrong.'});
     }   
@@ -251,7 +265,13 @@ function twilioCallback (req,res){
         break;
       case 'vote-fail':
         twilioResp.sms('Oops! Could not find that vote code ('+msgToRelay+') :( Try again');
+        break;
+      case 'name':
+        twilioResp.sms('Thanks ' + msgToRelay + '! We have noted your name.');
         break;        
+      case 'name-fail':
+        twilioResp.sms('Oops! Could not find any topic for you :( Email slover@nyu.edu with your name and session.');
+        break;                  
       default:
         twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
       }
