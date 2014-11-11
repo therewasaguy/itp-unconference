@@ -4,9 +4,7 @@ $(document).ready(function(){
 
 	function renderPage(){
 			$.getJSON( "/api/get/topics", function(data) {
-				console.log(data); // comes in as a data object with 2 arrays, 'teach' and 'learn'
 				$.each(data.teach, function(index) {
-				  console.log(data.teach[index]);
 	        $('#teach').append(
 	          '<div class="topic-holder" id="'+data.teach[index]._id+'">' +
 	          	'<p>Topic: ' +data.teach[index].description+'</p>' +
@@ -17,7 +15,6 @@ $(document).ready(function(){
 	        );
 	      });
 				$.each(data.learn, function(index) {
-				  console.log(data.learn[index])
 	        $('#learn').append(
 	          '<div class="topic-holder" id="'+data.learn[index]._id+'">' +
 	          	'<p>Topic: ' +data.learn[index].description+'</p>' +
@@ -30,9 +27,16 @@ $(document).ready(function(){
 		}
 });
 
-var socket = io('http://itp-jan-jam.herokuapp.com/');
+// local --> http://localhost:5000/
+// server --> http://itp-jan-jam.herokuapp.com/
+var socket = io('http://localhost:5000/');
 socket.on('connect', function () {
 	console.log('connected');
+	socket.emit('meh','hello back');
+});
+
+socket.on('hello', function (data) {
+  console.log(data);
 });
 
 socket.on('twilioData', function (data) {
