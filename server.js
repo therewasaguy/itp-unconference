@@ -197,9 +197,13 @@ function twilioCallback (req,res){
         break;
       case 'vote':
         // handle this differently
+        var emitNewData = true;
         Topic.findOneQ({'voteCode':msg})
         .then(function(response){
-          if(response == null) return respondBackToTwilio('vote-fail');
+          if(response == null) {
+            emitNewData = false;
+            return respondBackToTwilio('vote-fail');
+          }
           else { 
             var newVoteCount = response.voteCount + 1;
             var topicId = response._id;
@@ -207,8 +211,11 @@ function twilioCallback (req,res){
           }
         })
         .then(function(response){
-          emitSocketMsg('vote',response);
-          respondBackToTwilio('vote');
+          if(emitNewData){
+            emitSocketMsg('vote',response);
+            respondBackToTwilio('vote');
+          }
+          else return;
         }) 
         .fail(function (err) { console.log(err); })
         .done();       
