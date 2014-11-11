@@ -197,7 +197,7 @@ function twilioCallback (req,res){
         break;
       case 'vote':
         // handle this differently
-        var emitNewData = true;
+        var emitNewData = true; // should we emit the data to front-end? becomes false if error hit
         Topic.findOneQ({'voteCode':msg})
         .then(function(response){
           if(response == null) {
