@@ -222,7 +222,8 @@ function twilioCallback (req,res){
         break; 
       case 'name':
         // add the user's name for the topic they want to teach
-        Topic.findByIdAndUpdateQ('123',{person.name:msg}) // need this from the header;
+        var dataToSave = {person: {name:msg,phoneNumber: req.body.From}}
+        Topic.findByIdAndUpdateQ('123',dataToSave) // need this from the header;
         .then(function(response){
           if(response == null) {
             return respondBackToTwilio('name-fail');
@@ -254,7 +255,7 @@ function twilioCallback (req,res){
 
     switch(key) {
       case 'teach':
-        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name.');
+        twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name. Start your next message with name, like "Name Dan Shiffman"');
         res.cookie('conversation',conversationId);
         break;
       case 'learn':
@@ -273,7 +274,7 @@ function twilioCallback (req,res){
         twilioResp.sms('Oops! Could not find any topic for you :( Email slover@nyu.edu with your name and session.');
         break;                  
       default:
-        twilioResp.sms('We got your message, but you need to start it with either teach, learn or vote!');
+        twilioResp.sms('We got your message, but you need to start it with either teach, learn, vote, or name!');
       }
     res.set('Content-Type', 'text/xml');
     res.send(twilioResp.toString());    
