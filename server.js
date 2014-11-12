@@ -227,17 +227,18 @@ function twilioCallback (req,res){
         // add the user's name for the topic they want to teach
         var dataToSave = {person: {name:msg,phoneNumber: req.body.From}}
         var topicId = req.cookies.conversation; // we store the topicId in the conversation cookie
-        Topic.findByIdAndUpdateQ(topicId,dataToSave) // need this from the header;
+        Topic.findByIdAndUpdateQ(topicId,dataToSave)
         .then(function(response){
           if(response == null) return respondBackToTwilio('name-fail');
           else { 
             emitSocketMsg('name',response);
-            return respondBackToTwilio('vote');
+            respondBackToTwilio('name');
           }
+          return;
         })
         .fail(function (err) { console.log(err); })
         .done();       
-        break;                 
+        break;               
       default:
         res.status(500).send({error:'Oops, something went wrong.'});
     }   
@@ -254,7 +255,8 @@ function twilioCallback (req,res){
   function respondBackToTwilio(key){
 
     var twilioResp = new twilio.TwimlResponse();
-
+    console.log(key);
+    
     switch(key) {
       case 'teach':
         twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name. Start your next message with the word Name, like Name Dan Shiffman');
@@ -270,6 +272,7 @@ function twilioCallback (req,res){
         twilioResp.sms('Oops! Could not find that vote code ('+msgToRelay+') :( Try again');
         break;
       case 'name':
+        console.log('here');
         twilioResp.sms('Thanks ' + msgToRelay + '! We have noted your name and all that.');
         break;
       case 'name-fail':
