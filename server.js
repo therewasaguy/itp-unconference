@@ -228,13 +228,11 @@ function twilioCallback (req,res){
         var topicId = req.cookies.conversation; // we store the topicId in the conversation cookie
         Topic.findByIdAndUpdateQ(topicId,dataToSave) // need this from the header;
         .then(function(response){
-          console.log(response);
-          if(response == null) {
-            return respondBackToTwilio('name-fail');
-          }
+          if(response == null) return respondBackToTwilio('name-fail');
           else { 
             emitSocketMsg('name',response);
-            return respondBackToTwilio('name');
+            respondBackToTwilio('name');
+            return;
           }
         })
         .fail(function (err) { console.log(err); })
