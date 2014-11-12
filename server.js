@@ -272,7 +272,7 @@ function twilioCallback (req,res){
         break;
       case 'name':
         twilioResp.sms('Thanks ' + msgToRelay + '! We have noted your name and all that.');
-        break;        
+        break;
       case 'name-fail':
         twilioResp.sms('Oops! Could not find any topic for you :( Email slover@nyu.edu with your name and session.');
         break;                  
