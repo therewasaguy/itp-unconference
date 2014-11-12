@@ -265,7 +265,7 @@ function twilioCallback (req,res){
         twilioResp.sms('Sweet! We have noted that you want to learn ' + msgToRelay);
         break;
       case 'vote':
-        twilioResp.sms('Oh cool! We have noted your vote for ' + msgToRelay);
+        twilioResp.sms('Oh cool! We have noted your vote for the topic "' + msgToRelay+'"');
         break;
       case 'vote-fail':
         twilioResp.sms('Oops! Could not find that vote code ('+msgToRelay+') :( Try again');
