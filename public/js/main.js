@@ -62,7 +62,7 @@ socket.on('twilioData', function (data) {
   	case 'name':
   		//render teach data
   		console.log(data.topic)
-  		$("#"+data.topic._id+" .session-leader").text(data.topic.person.name);
+  		$("#"+data.topic._id+" .session-leader").text('Session Leader: ' +data.topic.person.name);
   		$("#"+data.topic._id+" .session-leader").show();
   		break;  		
   	case 'vote':

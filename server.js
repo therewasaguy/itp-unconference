@@ -233,7 +233,7 @@ function twilioCallback (req,res){
           }
           else { 
             emitSocketMsg('name',response);
-            respondBackToTwilio('name');
+            return respondBackToTwilio('name');
           }
         })
         .fail(function (err) { console.log(err); })
@@ -271,7 +271,7 @@ function twilioCallback (req,res){
         twilioResp.sms('Oops! Could not find that vote code ('+msgToRelay+') :( Try again');
         break;
       case 'name':
-        twilioResp.sms('Thanks ' + msgToRelay + '! We have noted your name.');
+        twilioResp.sms('Thanks ' + msgToRelay + '! We have noted your name and all that.');
         break;        
       case 'name-fail':
         twilioResp.sms('Oops! Could not find any topic for you :( Email slover@nyu.edu with your name and session.');
