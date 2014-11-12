@@ -102,9 +102,6 @@ function getData (req,res){
 
   var data = {}; // data to respond back with
 
-  //console.log(socketsUtil);
-  //socketsUtil.calls('hello','hello world');
-
   Topic.findQ({'type':'teach'})
   .then(function(response){
     data['teach'] = response;
@@ -136,6 +133,7 @@ function twilioCallback (req,res){
   }
 
   console.log(action);
+
   switch(action) {
       case 'teach':
         handleTwilioMessage('teach',msgToRelay);
@@ -149,7 +147,6 @@ function twilioCallback (req,res){
       case 'name':
         handleTwilioMessage('name',msgToRelay);
       default:
-        console.log('default called');
         respondBackToTwilio('default');
      }
 
@@ -174,7 +171,6 @@ function twilioCallback (req,res){
         .then(function (response){
           conversationId = response._id;
           conversationId = conversationId.toString();
-          console.log(conversationId);
           emitSocketMsg('teach',response);
           respondBackToTwilio('teach');
         })
@@ -257,7 +253,7 @@ function twilioCallback (req,res){
   function respondBackToTwilio(key){
 
     var twilioResp = new twilio.TwimlResponse();
-    console.log(key);
+    console.log('the key in respondBackToTwilio ' + key);
 
     switch(key) {
       case 'teach':
@@ -274,7 +270,6 @@ function twilioCallback (req,res){
         twilioResp.sms('Oops! Could not find that vote code ('+msgToRelay+') :( Try again');
         break;
       case 'name':
-        console.log('here');
         twilioResp.sms('Thanks ' + msgToRelay + '! We have noted your name and all that.');
         break;
       case 'name-fail':
