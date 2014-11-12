@@ -232,9 +232,8 @@ function twilioCallback (req,res){
           if(response == null) return respondBackToTwilio('name-fail');
           else { 
             emitSocketMsg('name',response);
-            respondBackToTwilio('name');
+            return respondBackToTwilio('vote');
           }
-          return;
         })
         .fail(function (err) { console.log(err); })
         .done();       
