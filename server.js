@@ -135,6 +135,7 @@ function twilioCallback (req,res){
     if(i!=words.length-1) msgToRelay += ' ';
   }
 
+  console.log(action);
   switch(action) {
       case 'teach':
         handleTwilioMessage('teach',msgToRelay);
@@ -148,6 +149,7 @@ function twilioCallback (req,res){
       case 'name':
         handleTwilioMessage('name',msgToRelay);
       default:
+        console.log('default called');
         respondBackToTwilio('default');
      }
 
@@ -256,7 +258,7 @@ function twilioCallback (req,res){
 
     var twilioResp = new twilio.TwimlResponse();
     console.log(key);
-    
+
     switch(key) {
       case 'teach':
         twilioResp.sms('Awesome! We have noted that you want to teach ' + msgToRelay +'. One more step, please respond with your name. Start your next message with the word Name, like Name Dan Shiffman');
