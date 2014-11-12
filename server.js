@@ -132,8 +132,6 @@ function twilioCallback (req,res){
     if(i!=words.length-1) msgToRelay += ' ';
   }
 
-  console.log('action is ' + action);
-
   switch(action) {
       case 'teach':
         handleTwilioMessage('teach',msgToRelay);
@@ -145,10 +143,9 @@ function twilioCallback (req,res){
         handleTwilioMessage('vote',msgToRelay);
         break;
       case 'name':
-        console.log('name got called and the action is ' + action);
         handleTwilioMessage('name',msgToRelay);
+        break;
       default:
-        console.log('default got called and the action is ' + action);
         respondBackToTwilio('default');
      }
 
@@ -232,9 +229,8 @@ function twilioCallback (req,res){
           if(response == null) return respondBackToTwilio('name-fail');
           else { 
             emitSocketMsg('name',response);
-            respondBackToTwilio('name');
+            return respondBackToTwilio('name');
           }
-          return;
         })
         .fail(function (err) { console.log(err); })
         .done();       
@@ -255,7 +251,6 @@ function twilioCallback (req,res){
   function respondBackToTwilio(key){
 
     var twilioResp = new twilio.TwimlResponse();
-    console.log('the key in respondBackToTwilio ' + key);
 
     switch(key) {
       case 'teach':
