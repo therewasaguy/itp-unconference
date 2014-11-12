@@ -147,6 +147,7 @@ function twilioCallback (req,res){
       case 'name':
         handleTwilioMessage('name',msgToRelay);
       default:
+        console.log('this got called and the action is ' + action);
         respondBackToTwilio('default');
      }
 
