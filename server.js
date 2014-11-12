@@ -122,7 +122,6 @@ function getData (req,res){
 function twilioCallback (req,res){
 
   var newMsg = req.body.Body;
-  console.log(req.cookies.conversation);
   var conversationId; // an id to track the conversation, will be the mongoDb id
 
   // let's get the first word, so we know which action they are doing
@@ -226,7 +225,8 @@ function twilioCallback (req,res){
       case 'name':
         // add the user's name for the topic they want to teach
         var dataToSave = {person: {name:msg,phoneNumber: req.body.From}}
-        Topic.findByIdAndUpdateQ('123',dataToSave) // need this from the header;
+        var topicId = req.cookies.conversation; // we store the topicId in the conversation cookie
+        Topic.findByIdAndUpdateQ(topicId,dataToSave) // need this from the header;
         .then(function(response){
           if(response == null) {
             return respondBackToTwilio('name-fail');

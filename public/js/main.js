@@ -8,7 +8,7 @@ $(document).ready(function(){
 	        $('#teach').append(
 	          '<div class="topic-holder" id="'+data.teach[index]._id+'">' +
 	          	'<p>Topic: ' +data.teach[index].description+'</p>' +
-	          	(data.teach[index].person.name ?'<p>Session Leader: ' +data.teach[index].person.name+'</p>' : '') +
+	          	(data.teach[index].person.name ?'<p class="session-leader">Session Leader: ' +data.teach[index].person.name+'</p>' : '<p class="session-leader" style="display:none"></p>') +
 	          	'<p class="vote-count">Current Vote Count: ' +data.teach[index].voteCount+'</p>' +
 	          	'<p>Vote for this topic by texting "Vote ' +data.teach[index].voteCode+'"</p>' +
 	        	'</div>'				  
@@ -42,7 +42,7 @@ socket.on('twilioData', function (data) {
       $('#teach').append(
         '<div class="topic-holder" id="'+data.topic._id+'">' +
         	'<p>Topic: ' +data.topic.description+'</p>' +
-        	(data.topic.person.name ?'<p>Session Leader: ' +data.topic.person.name+'</p>' : '') +
+        	(data.topic.person.name ?'<p class="session-leader">Session Leader: ' +data.topic.person.name+'</p>' : '<p class="session-leader" style="display:none"></p>') +
         	'<p class="vote-count">Current Vote Count: ' +data.topic.voteCount+'</p>' +
         	'<p>Vote for this topic by texting "Vote ' +data.topic.voteCode+'"</p>' +
       	'</div>'				  
@@ -59,6 +59,12 @@ socket.on('twilioData', function (data) {
       	'</div>'				  
       );    		
   		break;
+  	case 'name':
+  		//render teach data
+  		console.log(data.topic)
+  		$("#"+data.topic._id+" .session-leader").text(data.topic.person.name);
+  		$("#"+data.topic._id+" .session-leader").show();
+  		break;  		
   	case 'vote':
   		//render teach data
   		console.log(data.topic)
