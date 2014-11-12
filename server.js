@@ -214,6 +214,7 @@ function twilioCallback (req,res){
         })
         .then(function(response){
           if(emitNewData){
+            msgToRelay = response.description; // change the reponsse msg to the topic
             emitSocketMsg('vote',response);
             respondBackToTwilio('vote');
           }
@@ -232,8 +233,8 @@ function twilioCallback (req,res){
           else { 
             emitSocketMsg('name',response);
             respondBackToTwilio('name');
-            return;
           }
+          return;
         })
         .fail(function (err) { console.log(err); })
         .done();       
