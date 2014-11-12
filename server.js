@@ -132,7 +132,7 @@ function twilioCallback (req,res){
     if(i!=words.length-1) msgToRelay += ' ';
   }
 
-  console.log(action);
+  console.log('action is ' + action);
 
   switch(action) {
       case 'teach':
@@ -145,9 +145,10 @@ function twilioCallback (req,res){
         handleTwilioMessage('vote',msgToRelay);
         break;
       case 'name':
+        console.log('name got called and the action is ' + action);
         handleTwilioMessage('name',msgToRelay);
       default:
-        console.log('this got called and the action is ' + action);
+        console.log('default got called and the action is ' + action);
         respondBackToTwilio('default');
      }
 
