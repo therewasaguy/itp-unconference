@@ -6,20 +6,21 @@ $(document).ready(function(){
 			$.getJSON( "/api/get/topics", function(data) {
 				$.each(data.teach, function(index) {
 	        $('#teach').append(
-	          '<div class="topic-holder" id="'+data.teach[index]._id+'">' +
-	          	'<p>Topic: ' +data.teach[index].description+'</p>' +
-	          	(data.teach[index].person.name ?'<p class="session-leader">Session Leader: ' +data.teach[index].person.name+'</p>' : '<p class="session-leader" style="display:none"></p>') +
-	          	'<p class="vote-count">Current Vote Count: ' +data.teach[index].voteCount+'</p>' +
-	          	'<p>Vote for this topic by texting "Vote ' +data.teach[index].voteCode+'"</p>' +
+	          '<div class="topic-holder col-md-4" id="'+data.teach[index]._id+'">' +
+	          	'<p class="headings">'+data.teach[index].description+ ' ' +
+	          	(data.teach[index].person.name ?'<span class="session-leader">with ' +data.teach[index].person.name+'</p>' : '<span class="session-leader" style="display:none"></span>') +
+              '</p>' +
+	          	'<p class="vote-count">'+data.teach[index].voteCount+' votes</p>' +
+	          	'<p>Text "Vote ' +data.teach[index].voteCode+'"</p>' +
 	        	'</div>'				  
 	        );
 	      });
 				$.each(data.learn, function(index) {
 	        $('#learn').append(
-	          '<div class="topic-holder" id="'+data.learn[index]._id+'">' +
-	          	'<p>Topic: ' +data.learn[index].description+'</p>' +
-	          	'<p class="vote-count">Current Vote Count: ' +data.learn[index].voteCount+'</p>' +
-	          	'<p>Vote for this topic by texting "Vote ' +data.learn[index].voteCode+'"</p>' +
+	          '<div class="topic-holder col-md-4" id="'+data.learn[index]._id+'">' +
+	          	'<p class="headings">'+data.learn[index].description+'</p>' +
+	          	'<p class="vote-count">'+data.learn[index].voteCount+' votes</p>' +
+	          	'<p>Text "Vote ' +data.learn[index].voteCode+'"</p>' +
 	        	'</div>'				  
 	        );
 	      });					
@@ -40,11 +41,12 @@ socket.on('twilioData', function (data) {
   		//render teach data
   		console.log(data.topic)
       $('#teach').append(
-        '<div class="topic-holder" id="'+data.topic._id+'">' +
-        	'<p>Topic: ' +data.topic.description+'</p>' +
-        	(data.topic.person.name ?'<p class="session-leader">Session Leader: ' +data.topic.person.name+'</p>' : '<p class="session-leader" style="display:none"></p>') +
-        	'<p class="vote-count">Current Vote Count: ' +data.topic.voteCount+'</p>' +
-        	'<p>Vote for this topic by texting "Vote ' +data.topic.voteCode+'"</p>' +
+        '<div class="topic-holder col-md-4" id="'+data.topic._id+'">' +
+          '<p class="headings">'+data.topic.description+ ' ' +
+          (data.topic.person.name ?'<span class="session-leader">with ' +data.topic.person.name+'</p>' : '<span class="session-leader" style="display:none"></span>') +
+          '</p>' +
+          '<p class="vote-count">'+data.topic.voteCount+' votes</p>' +
+        	'<p>Text "Vote ' +data.topic.voteCode+'"</p>' +
       	'</div>'				  
       );  		
   		break;
@@ -52,17 +54,17 @@ socket.on('twilioData', function (data) {
   		//render teach data
   		console.log(data.topic)
       $('#learn').append(
-        '<div class="topic-holder" id="'+data.topic._id+'">' +
-        	'<p>Topic: ' +data.topic.description+'</p>' +
-        	'<p class="vote-count">Current Vote Count: ' +data.topic.voteCount+'</p>' +
-        	'<p>Vote for this topic by texting "Vote ' +data.topic.voteCode+'"</p>' +
+        '<div class="topic-holder col-md-4" id="'+data.topic._id+'">' +
+        	'<p class="headings">'+data.topic.description+'</p>' +
+          '<p class="vote-count">'+data.topic.voteCount+' votes</p>' +
+        	'<p>Text "Vote ' +data.topic.voteCode+'"</p>' +
       	'</div>'				  
       );    		
   		break;
   	case 'name':
   		//render teach data
   		console.log(data.topic)
-  		$("#"+data.topic._id+" .session-leader").text('Session Leader: ' +data.topic.person.name);
+  		$("#"+data.topic._id+" .session-leader").text('with ' +data.topic.person.name);
   		$("#"+data.topic._id+" .session-leader").show();
   		break;  		
   	case 'vote':

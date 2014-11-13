@@ -2,55 +2,57 @@
    Fonts
    ========================================================================== */
 @font-face {
-	font-family: 'museo_sans_rounded100';
-	src: url('../fonts/museosansrounded-100-webfont.eot');
-	src: url('../fonts/museosansrounded-100-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/museosansrounded-100-webfont.woff') format('woff'),
-		url('../fonts/museosansrounded-100-webfont.ttf') format('truetype'),
-		url('../fonts/museosansrounded-100-webfont.svg#museo_sans_rounded100') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'museo_sans_rounded300';
-	src: url('../fonts/museosansrounded-300-webfont.eot');
-	src: url('../fonts/museosansrounded-300-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/museosansrounded-300-webfont.woff') format('woff'),
-		url('../fonts/museosansrounded-300-webfont.ttf') format('truetype'),
-		url('../fonts/museosansrounded-300-webfont.svg#museo_sans_rounded300') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'museo_sans_rounded500';
-	src: url('../fonts/museosansrounded-500-webfont.eot');
-	src: url('../fonts/museosansrounded-500-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/museosansrounded-500-webfont.woff') format('woff'),
-		url('../fonts/museosansrounded-500-webfont.ttf') format('truetype'),
-		url('../fonts/museosansrounded-500-webfont.svg#museo_sans_rounded500') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'museo_sans_rounded700';
-	src: url('../fonts/museosansrounded-700-webfont.eot');
-	src: url('../fonts/museosansrounded-700-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/museosansrounded-700-webfont.woff') format('woff'),
-		url('../fonts/museosansrounded-700-webfont.ttf') format('truetype'),
-		url('../fonts/museosansrounded-700-webfont.svg#museo_sans_rounded700') format('svg');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'solid_chalk';
+    src: url('../fonts/../fonts/kgsecondchancessolid-webfont.eot');
+    src: url('../fonts/kgsecondchancessolid-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/kgsecondchancessolid-webfont.woff2') format('woff2'),
+         url('../fonts/kgsecondchancessolid-webfont.woff') format('woff'),
+         url('../fonts/kgsecondchancessolid-webfont.ttf') format('truetype'),
+         url('../fonts/kgsecondchancessolid-webfont.svg#kg_second_chances_solidRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
-html,body {height:100%;}
+@font-face {
+    font-family: 'sketch_chalk';
+    src: url('../fonts/kgsecondchancessketch-webfont.eot');
+    src: url('../fonts/kgsecondchancessketch-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/kgsecondchancessketch-webfont.woff2') format('woff2'),
+         url('../fonts/kgsecondchancessketch-webfont.woff') format('woff'),
+         url('../fonts/kgsecondchancessketch-webfont.ttf') format('truetype'),
+         url('../fonts/kgsecondchancessketch-webfont.svg#kg_second_chances_sketchRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
+html,body {height:100%;font-family: 'solid_chalk', Helvetica, arial, sans-serif;color:#fff;}
+
+h1, .headings{
+	font-family: 'sketch_chalk', Helvetica, arial, sans-serif;
+	color: #9a63c9;
+}
+
+.title-heading{font-size: 50px;}
+
+.green-headings{
+	color: #2EBAAC;
+}
+
+p.headings{
+	font-size: 21px;
+}
+
+p.sub-headings{
+	font-size: 18px;
+}
+
+body{background: url('../img/bg.png');}
 .centered{
 	text-align: center;
 }
 
 .topic-holder{
-	background: #f1f1f1;
 	padding: 20px;
-	border: 1px solid;
 	margin-bottom: 20px;
 }
