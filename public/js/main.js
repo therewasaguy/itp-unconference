@@ -59,14 +59,12 @@ socket.on('twilioData', function (data) {
   		break;
   	case 'name':
   		//render teach data
-  		console.log(data.topic)
   		$("#"+data.topic._id+" .session-leader").text('with ' +data.topic.person.name);
   		$("#"+data.topic._id+" .session-leader").show();
   		break;  		
   	case 'vote':
   		//render teach data
-  		console.log(data.topic)
-  		$("#"+data.topic._id+" .vote-count").text(data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+')');
+  		$("#"+data.topic._id+" .vote-count").innerHTML(data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+')');
   		break;
   	default:
   		console.log('invalid twilio socket event');	  		  		
