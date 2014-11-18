@@ -64,7 +64,7 @@ socket.on('twilioData', function (data) {
   		break;  		
   	case 'vote':
   		//render teach data
-  		$("#"+data.topic._id+" .vote-count").innerHTML(data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+')');
+  		$("#"+data.topic._id+" .vote-count").html(data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+')');
   		break;
   	default:
   		console.log('invalid twilio socket event');	  		  		
