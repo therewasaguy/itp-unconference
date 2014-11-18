@@ -10,7 +10,7 @@ $(document).ready(function(){
 	          	'<p class="headings">'+data.teach[index].description+ ' ' +
 	          	(data.teach[index].person.name ?'<span class="session-leader">with ' +data.teach[index].person.name+'</p>' : '<span class="session-leader" style="display:none"></span>') +
               '</p>' +
-              '<p class="vote-count">'+data.teach[index].voteCount+' votes (Vote ' +data.learn[index].voteCode+')</p>' +
+              '<p class="vote-count">'+data.teach[index].voteCount+' votes (Vote ' +data.teach[index].voteCode+')</p>' +
 	        	'</div>'				  
 	        );
 	      });
