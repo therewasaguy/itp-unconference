@@ -61,6 +61,8 @@ app.all('*', function(req, res, next){
 // ROUTES
 
 app.get('/', index);
+app.get('/teach', teach);
+app.get('/learn', learn);
 app.get('/api/get/topics',getData);
 app.post('/twilio-callback',twilioCallback);
 
@@ -95,6 +97,30 @@ function index (req, res) {
     }
 
     res.render('index.html', viewData);
+
+}
+
+
+function teach (req, res) {
+  
+    //build and render template
+    var viewData = {
+      pageTitle : "TEACH | ITP January"
+    }
+
+    res.render('teach.html', viewData);
+
+}
+
+
+function learn (req, res) {
+  
+    //build and render template
+    var viewData = {
+      pageTitle : "LEARN | ITP January"
+    }
+
+    res.render('learn.html', viewData);
 
 }
 

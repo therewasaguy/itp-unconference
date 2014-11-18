@@ -10,8 +10,7 @@ $(document).ready(function(){
 	          	'<p class="headings">'+data.teach[index].description+ ' ' +
 	          	(data.teach[index].person.name ?'<span class="session-leader">with ' +data.teach[index].person.name+'</p>' : '<span class="session-leader" style="display:none"></span>') +
               '</p>' +
-	          	'<p class="vote-count">'+data.teach[index].voteCount+' votes</p>' +
-	          	'<p>Text "Vote ' +data.teach[index].voteCode+'"</p>' +
+              '<p class="vote-count">'+data.teach[index].voteCount+' votes (Vote ' +data.learn[index].voteCode+')</p>' +
 	        	'</div>'				  
 	        );
 	      });
@@ -19,8 +18,7 @@ $(document).ready(function(){
 	        $('#learn').append(
 	          '<div class="topic-holder col-md-4" id="'+data.learn[index]._id+'">' +
 	          	'<p class="headings">'+data.learn[index].description+'</p>' +
-	          	'<p class="vote-count">'+data.learn[index].voteCount+' votes</p>' +
-	          	'<p>Text "Vote ' +data.learn[index].voteCode+'"</p>' +
+	          	'<p class="vote-count">'+data.learn[index].voteCount+' votes (Vote ' +data.learn[index].voteCode+')</p>' +
 	        	'</div>'				  
 	        );
 	      });					
@@ -30,7 +28,7 @@ $(document).ready(function(){
 
 // local --> http://localhost:5000/
 // server --> http://itp-jan-jam.herokuapp.com/
-var socket = io('http://itp-jan-jam.herokuapp.com/');
+var socket = io('http://localhost:5000/');
 socket.on('connect', function () {
 	console.log('connected');
 });
@@ -45,8 +43,7 @@ socket.on('twilioData', function (data) {
           '<p class="headings">'+data.topic.description+ ' ' +
           (data.topic.person.name ?'<span class="session-leader">with ' +data.topic.person.name+'</p>' : '<span class="session-leader" style="display:none"></span>') +
           '</p>' +
-          '<p class="vote-count">'+data.topic.voteCount+' votes</p>' +
-        	'<p>Text "Vote ' +data.topic.voteCode+'"</p>' +
+          '<p class="vote-count">'+data.topic.voteCount+' votes (Vote ' +data.topic.voteCode+')</p>' +
       	'</div>'				  
       );  		
   		break;
@@ -56,8 +53,7 @@ socket.on('twilioData', function (data) {
       $('#learn').append(
         '<div class="topic-holder col-md-4" id="'+data.topic._id+'">' +
         	'<p class="headings">'+data.topic.description+'</p>' +
-          '<p class="vote-count">'+data.topic.voteCount+' votes</p>' +
-        	'<p>Text "Vote ' +data.topic.voteCode+'"</p>' +
+          '<p class="vote-count">'+data.topic.voteCount+' votes (Vote ' +data.topic.voteCode+')</p>' +
       	'</div>'				  
       );    		
   		break;
