@@ -84,7 +84,7 @@ socket.on('twilioData', function (data) {
       $vc = $($teach).find('.vote-count'),
       mySplitHeading = new SplitText($heading, {type:"chars, words"}),
       mySplitVC = new SplitText($vc, {type:"chars, words"}),
-      mySplitV = new SplitText($v, {type:"chars, words"}),
+      //mySplitV = new SplitText($v, {type:"chars, words"}),
       tl = new TimelineLite({delay:1}),
       tl.add("test", "+=5");
       numHChars = mySplitHeading.chars.length;
