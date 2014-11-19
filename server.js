@@ -127,11 +127,10 @@ function learn (req, res) {
 function getData (req,res){
 
   var data = {}; // data to respond back with
-
-  Topic.findQ({'type':'teach'})
+  Topic.find({'type':'teach'}).sort('-dateAdded').execQ()
   .then(function(response){
     data['teach'] = response;
-    return Topic.findQ({'type':'learn'})
+    return Topic.find({'type':'learn'}).sort('-dateAdded').execQ()
   }) 
   .then(function(response){
     data['learn'] = response;
@@ -268,7 +267,7 @@ function twilioCallback (req,res){
 
   function generateVoteCode(){
     var code = '';
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var possible = "abcdefghjkmnpqrstuvwxyz23456789";
     for(var i=0;i<3;i++)
       code += possible.charAt(Math.floor(Math.random() * possible.length));   
     return code;
