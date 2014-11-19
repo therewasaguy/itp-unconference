@@ -57,8 +57,8 @@ function randomizeFont(){
 }
 
 // local --> http://localhost:5000/
-// server --> http://itp-jan-jam.herokuapp.com/
-var socket = io('http://localhost:5000/');
+// server --> https://itp-jan-jam.herokuapp.com/
+var socket = io('https://itp-unconference.herokuapp.com');
 socket.on('connect', function () {
 	console.log('connected');
 });
