@@ -10,7 +10,7 @@ $(document).ready(function(){
           var sizeClass = randomizeSize();
           var fontClass = randomizeFont();
 	        $('#teach').append(
-	          '<div class="topic-holder col-md-2 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.teach[index]._id+'">' +
+	          '<div class="topic-holder col-md-3 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.teach[index]._id+'">' +
 	          	'<p class="headings '+fontClass+'">'+data.teach[index].description+ '</p>' +
               '<p class="vote-count">'+data.teach[index].voteCount+' votes &nbsp (Text "Vote ' +data.teach[index].voteCode+'")</p>' +
 	        	'</div>'				  
@@ -22,7 +22,7 @@ $(document).ready(function(){
           var sizeClass = randomizeSize();
           var fontClass = randomizeFont();          
 	        $('#learn').append(
-            '<div class="topic-holder col-md-2 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.learn[index]._id+'">' +
+            '<div class="topic-holder col-md-3 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.learn[index]._id+'">' +
 	          	'<p class="headings '+fontClass+'">'+data.learn[index].description+'</p>' +
 	          	'<p class="vote-count">'+data.learn[index].voteCount+' votes &nbsp (Text "Vote ' +data.learn[index].voteCode+'")</p>' +
 	        	'</div>'				  
@@ -76,7 +76,7 @@ socket.on('twilioData', function (data) {
       var sizeClass = randomizeSize();
       var fontClass = randomizeFont();      
       $('#teach').prepend(
-        '<div class="topic-holder col-md-2 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.topic._id+'">' +
+        '<div class="topic-holder col-md-3 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.topic._id+'">' +
           '<p class="headings '+fontClass+'">'+data.topic.description+ '</p>' +
           '<p class="vote-count">'+data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+'")</p>' +
       	'</div>'				  
@@ -106,7 +106,7 @@ socket.on('twilioData', function (data) {
       var sizeClass = randomizeSize();
       var fontClass = randomizeFont();     
       $('#learn').prepend(
-        '<div class="topic-holder col-md-2 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.topic._id+'">' +
+        '<div class="topic-holder col-md-3 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.topic._id+'">' +
         	'<p class="headings '+fontClass+'">'+data.topic.description+'</p>' +
           '<p class="vote-count">'+data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+'")</p>' +
       	'</div>'
