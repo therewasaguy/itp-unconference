@@ -134,7 +134,7 @@ body{background: url('../img/bg.png');}
 }
 
 .sketch_chalk{font-family: 'sketch_chalk', Helvetica, arial, sans-serif!important;font-size: 30px!important;line-height: 35px;}
-.hand {font-family: 'Just Another Hand', cursive!important;font-size: 50px!important;}
+.hand {font-family: 'Just Another Hand', cursive!important;font-size: 50px!important;line-height: 40px;}
 .handlee {font-family: 'Handlee', cursive;font-size: 50px!important;line-height: 45px;}
 .patrickhand{font-family: 'Patrick Hand SC', cursive!important;font-size: 40px!important;}
 .gochihand {font-family: 'Gochi Hand', cursive!important;font-size: 35px!important;}
