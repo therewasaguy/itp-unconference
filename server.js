@@ -253,7 +253,7 @@ function twilioCallback (req,res){
         .then(function(response){
           if(response == null) return respondBackToTwilio('name-fail');
           else { 
-            emitSocketMsg('name',response);
+            //emitSocketMsg('name',response);
             return respondBackToTwilio('name');
           }
         })

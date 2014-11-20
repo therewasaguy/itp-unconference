@@ -64,7 +64,6 @@ function randomNumber(min, max){
 // server --> https://itp-jan-jam.herokuapp.com/
 var socket = io('https://itp-unconference.herokuapp.com');
 socket.on('connect', function () {
-	console.log('connected');
 });
 
 socket.on('twilioData', function (data) {
@@ -92,7 +91,6 @@ socket.on('twilioData', function (data) {
       tl.add("test", "+=5");
       numHChars = mySplitHeading.chars.length;
       numVCChars = mySplitVC.chars.length;
-      console.log(numHChars);
       for(var i = 0; i < numHChars; i++){
         tl.from(mySplitHeading.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, i*.2);
       }
@@ -110,7 +108,7 @@ socket.on('twilioData', function (data) {
       $('#learn').prepend(
         '<div class="topic-holder col-md-2 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.topic._id+'">' +
         	'<p class="headings '+fontClass+'">'+data.topic.description+'</p>' +
-          '<p class="vote-count">'+data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+'"")</p>' +
+          '<p class="vote-count">'+data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+'")</p>' +
       	'</div>'
         );
         //animate
@@ -123,7 +121,6 @@ socket.on('twilioData', function (data) {
         tl.add("test", "+=5");
         numHChars = mySplitHeading.chars.length;
         numVCChars = mySplitVC.chars.length;
-        console.log(numHChars);
         for(var i = 0; i < numHChars; i++){
           tl.from(mySplitHeading.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, i*.2);
         }
