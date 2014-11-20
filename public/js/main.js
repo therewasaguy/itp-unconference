@@ -56,6 +56,10 @@ function randomizeFont(){
   return classList[ran];    
 }
 
+function randomNumber(min, max){
+    return Math.floor(Math.random() * (1 + max - min) + min);
+}
+
 // local --> http://localhost:5000/
 // server --> https://itp-jan-jam.herokuapp.com/
 var socket = io('https://itp-unconference.herokuapp.com');
