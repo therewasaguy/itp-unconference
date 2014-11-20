@@ -88,12 +88,10 @@ socket.on('twilioData', function (data) {
       $vc = $($teach).find('.vote-count'),
       mySplitHeading = new SplitText($heading, {type:"chars, words"}),
       mySplitVC = new SplitText($vc, {type:"chars, words"}),
-      //mySplitV = new SplitText($v, {type:"chars, words"}),
       tl = new TimelineLite({delay:1}),
       tl.add("test", "+=5");
       numHChars = mySplitHeading.chars.length;
       numVCChars = mySplitVC.chars.length;
-      //numVChars = mySplitV.chars.length;
       console.log(numHChars);
       for(var i = 0; i < numHChars; i++){
         tl.from(mySplitHeading.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, i*.2);
@@ -101,11 +99,7 @@ socket.on('twilioData', function (data) {
 
       for(var i = 0; i < numVCChars; i++){
         tl.from(mySplitVC.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2+i*.2);
-      }
-
-      // for(var i = 0; i < numVChars; i++){
-      //   tl.from(mySplitV.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2 + numHChars*.2 +i*.5);
-      // }      		
+      }     		
   		break;
   	case 'learn':
   		//render teach data
@@ -117,7 +111,25 @@ socket.on('twilioData', function (data) {
         '<div class="topic-holder col-md-2 '+posClass+' '+rotClass+' '+sizeClass+'" id="'+data.topic._id+'">' +
         	'<p class="headings '+fontClass+'">'+data.topic.description+'</p>' +
           '<p class="vote-count">'+data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+'"")</p>' +
-      	'</div>'				  
+      	'</div>'
+        //animate
+        $learn = $('#learn').find('#'+data.topic._id);
+        $heading = $($learn).find('.headings'),
+        $vc = $($learn).find('.vote-count'),
+        mySplitHeading = new SplitText($heading, {type:"chars, words"}),
+        mySplitVC = new SplitText($vc, {type:"chars, words"}),
+        tl = new TimelineLite({delay:1}),
+        tl.add("test", "+=5");
+        numHChars = mySplitHeading.chars.length;
+        numVCChars = mySplitVC.chars.length;
+        console.log(numHChars);
+        for(var i = 0; i < numHChars; i++){
+          tl.from(mySplitHeading.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, i*.2);
+        }
+
+        for(var i = 0; i < numVCChars; i++){
+          tl.from(mySplitVC.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2+i*.2);
+        }        				  
       );          		
   		break;
   	// case 'name':
