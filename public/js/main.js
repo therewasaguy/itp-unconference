@@ -112,6 +112,7 @@ socket.on('twilioData', function (data) {
         	'<p class="headings '+fontClass+'">'+data.topic.description+'</p>' +
           '<p class="vote-count">'+data.topic.voteCount+' votes &nbsp (Text "Vote ' +data.topic.voteCode+'"")</p>' +
       	'</div>'
+        );
         //animate
         $learn = $('#learn').find('#'+data.topic._id);
         $heading = $($learn).find('.headings'),
@@ -129,8 +130,7 @@ socket.on('twilioData', function (data) {
 
         for(var i = 0; i < numVCChars; i++){
           tl.from(mySplitVC.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2+i*.2);
-        }        				  
-      );          		
+        }        		
   		break;
   	// case 'name':
   	// 	//render teach data
