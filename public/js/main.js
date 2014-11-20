@@ -89,7 +89,7 @@ socket.on('twilioData', function (data) {
       tl.add("test", "+=5");
       numHChars = mySplitHeading.chars.length;
       numVCChars = mySplitVC.chars.length;
-      numVChars = mySplitV.chars.length;
+      //numVChars = mySplitV.chars.length;
       console.log(numHChars);
       for(var i = 0; i < numHChars; i++){
         tl.from(mySplitHeading.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, i*.2);
@@ -99,9 +99,9 @@ socket.on('twilioData', function (data) {
         tl.from(mySplitVC.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2+i*.2);
       }
 
-      for(var i = 0; i < numVChars; i++){
-        tl.from(mySplitV.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2 + numHChars*.2 +i*.5);
-      }      		
+      // for(var i = 0; i < numVChars; i++){
+      //   tl.from(mySplitV.chars[i], 2, {z:randomNumber(-500,300), opacity:0, rotationY:randomNumber(-40, 40)}, numHChars*.2 + numHChars*.2 +i*.5);
+      // }      		
   		break;
   	case 'learn':
   		//render teach data
