@@ -95,11 +95,11 @@ body{background: url('../img/bg.png');}
 }
 
 .pullLeft{
-    left:-25px;
+    left:-15px;
 }
 
 .pullRight{
-    right:-35px;
+    right:-25px;
 }
 
 .pullUp{
