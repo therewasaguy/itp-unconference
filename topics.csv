@@ -1,0 +1,59 @@
+description,type,voteCount,person
+"ICM 'Next' Level (2.0!)","learn",4,
+"object oriented programming tutorial","learn",7,
+"Art of the Gif","teach",2,"{ ""name"" : ""Sarah Rothberg"", ""phoneNumber"" : ""+16318892019"" }"
+"Dynamic web with nodejs","teach",11,"{ ""name"" : ""sam Slover"", ""phoneNumber"" : ""+14043230470"" }"
+"Live video performance with MaxMSPJitter","teach",5,"{ ""name"" : ""Matt Romein"", ""phoneNumber"" : ""+12067783618"" }"
+"how to make a gif","learn",4,
+"Unity 2d","learn",5,
+"OpenFrameworks","learn",15,
+"Basic Javascript language","learn",10,
+"node osc","learn",3,
+"machine learning","learn",14,
+"basics of location tracking using smartphones","learn",11,
+"kinect + javascript","learn",8,
+"illustrator ","learn",10,
+"pimp my webpage: Wordpress and cyber duck help, how to load processing sketches nicely on your webpage","learn",5,
+"unity2d","learn",3,
+"Interactive Data Visualization             ","teach",6,"{ ""name"" : ""Brian Clifton             "", ""phoneNumber"" : ""+12486722365"" }"
+"Natural Language Processing with Python","teach",3,"{ ""name"" : ""Ross Goodwin"", ""phoneNumber"" : ""+19258789270"" }"
+"Swift In The Post-Objective-C Era","teach",1,"{ ""name"" : ""Jason Dunne"", ""phoneNumber"" : ""+16502797310"" }"
+"C++/cinder","learn",5,
+"Data Structures and Common Design Patterns","teach",5,"{ ""name"" : ""Michael Oneppo"", ""phoneNumber"" : ""+12038924445"" }"
+"macrame","learn",1,
+"Max / MSP","learn",7,
+"datamoshing","learn",1,
+"popcorn.js","learn",4,
+"basics of scraping the web","learn",9,
+"Flash-like JS 2D animation","learn",7,
+"Power Supply Strategy","learn",2,
+"Projection Mapping with Processing and Madmapper","teach",4,"{ ""name"" : ""John Farrell "", ""phoneNumber"" : ""+14846787440"" }"
+"Arduino Yun as Client and Server","teach",4,"{ ""name"" : ""Dan Melancon/David Tracy"", ""phoneNumber"" : ""+18188077303"" }"
+"How ""I Want To Learn works""","learn",3,
+"3D Modeling/Visualization","learn",10,
+"chemistry with electricity! ","learn",2,
+"vinyl cutter","learn",1,
+"IRC","learn",1,
+"how to use github","learn",3,
+"NFT, RFID & Beacons","learn",6,
+"Raspberry Pi","learn",4,
+"basic shop stuff!","learn",2,
+"video editing","teach",1,"{ ""name"" : ""Kris Budelis"", ""phoneNumber"" : ""+16099335166"" }"
+"documentary filmmaking","teach",2,"{ ""name"" : ""Kris Budelis"", ""phoneNumber"" : ""+16099335166"" }"
+"Web Audio API","teach",1,"{ ""name"" : ""Jason Sigal"", ""phoneNumber"" : ""+16095586116"" }"
+"Contributing to Open Source Projects","teach",1,"{ ""name"" : ""Jason Sigal"", ""phoneNumber"" : ""+16095586116"" }"
+"Art market and artist in Digital Art","learn",3,
+"Javascript Cool Libraries(Studio)","learn",6,
+"Interactive Installation/Art in Public Area","learn",5,
+"Intro to VJ Skill and VJ culture","teach",1,"{ ""phoneNumber"" : ""+19178037029"" }"
+"Intermediate After Effects and Premier ","learn",3,
+"Photoshop and Illustrator stuff","learn",2,
+"Sewing crash course","learn",4,
+"Intro to Game Design (software-free)","teach",1,"{ ""name"" : ""Sharang "", ""phoneNumber"" : ""+16034432725"" }"
+"sewing","teach",2,"{ ""name"" : ""Teresa Lamb"", ""phoneNumber"" : ""+18136242987"" }"
+"social nerworks","learn",1,
+"semiotics","teach",1,"{ ""name"" : ""Maximo Sica"", ""phoneNumber"" : ""+13478526204"" }"
+"Theory of Relativity","teach",1,"{ ""name"" : ""Sagar Mohite"", ""phoneNumber"" : ""+17186129671"" }"
+"swift","learn",1,
+"math for artists","teach",1,"{ ""name"" : ""amelia winger-bearskin and Martha winger-bearskin (engineer sister)"", ""phoneNumber"" : ""+19175204124"" }"
+"Social Data Analysis using python","teach",1,"{ ""name"" : ""Adarsh Kosuru"", ""phoneNumber"" : ""+12012818627"" }"
