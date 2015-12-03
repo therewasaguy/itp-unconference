@@ -3,6 +3,9 @@ $(document).ready(function(){
 	renderPage();
 
 	function renderPage(){
+    $('[data-toggle="tooltip"]').tooltip();   
+
+
 			$.getJSON( "/api/get/topics", function(data) {
 				$.each(data.teach, function(index) {
           var posClass = randomizePos();
@@ -67,7 +70,9 @@ function randomNumber(min, max){
 
 // local --> http://localhost:5000/
 // server --> https://itp-jan-jam.herokuapp.com/
-var socket = io('https://itp-unconference.herokuapp.com');
+// var socket = io('https://itp-unconference.herokuapp.com');
+var socket = io('https://itp-unconf-2016.herokuapp.com');
+
 socket.on('connect', function () {
 });
 
