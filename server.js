@@ -11,6 +11,11 @@ var mongoose = require('mongoose-q')(require('mongoose')); // convenience method
 // the ExpressJS App
 var app = express();
 
+// for testing
+if (!process.env.TWILIO_AUTH_TOKEN) {
+  require('dotenv').load();
+}
+
 // configuration of port, templates (/views), static files (/public)
 // and other expressjs settings for the web server.
 app.configure(function(){
